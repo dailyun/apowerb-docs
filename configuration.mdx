@@ -151,6 +151,7 @@ user signs in.
 | --- | --- |
 | `GOOGLE_INTEGRATION_CLIENT_ID` / `_SECRET` / `_REDIRECT_URI` | Google Workspace — Drive, Gmail, Calendar, Sheets, Docs |
 | `MICROSOFT_INTEGRATION_CLIENT_ID` / `_SECRET` / `_TENANT_ID` / `_REDIRECT_URI` | Microsoft 365 — Outlook, Teams, OneDrive, SharePoint |
+| `OUTLOOK_MAIL_REDIRECT_URI` | Optional override for the Outlook Mail callback. Deduced from `APP_PUBLIC_URL` when set; otherwise defaults to `http://localhost:3000/emailing/microsoft/callback` |
 | `GITHUB_INTEGRATION_CLIENT_ID` / `_SECRET` / `_REDIRECT_URI` | GitHub workspace integration |
 
 <Note>
@@ -199,6 +200,22 @@ See [Gmail webhooks](/guides/integrations/google) for the full setup.
   line, no error, no email. There is no hardcoded fallback address: an installation
   that leaves these unset sends nothing, rather than mailing a third party by default.
 </Note>
+
+## Bug reports (optional)
+
+Bug reports stay in the application unless an administrator exports them to GitHub.
+Set both variables to enable that export; neither is required for in-app reports.
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `BUG_REPORT_GITHUB_REPO` | empty | Private destination repository, in `owner/repo` format |
+| `BUG_REPORT_GITHUB_TOKEN` | empty | Personal access token with only `issues:write` permission on the destination repository |
+
+<Warning>
+  Exported reports can contain server logs, browser errors and the reporter's email
+  address. The server checks the destination's visibility before each write and
+  refuses a public repository.
+</Warning>
 
 ## Storage (optional)
 
@@ -265,6 +282,7 @@ Agents with no model of their own fall back to this provider.
 | `AUTH_EMAIL_VERIFICATION_ENABLED` | `false` | Require a confirmed address before use |
 | `EMAIL_VERIFY_TOKEN_EXPIRE_HOURS` | `24` | Lifetime of the confirmation token |
 | `APP_PUBLIC_URL` | `http://localhost:3000` | Public URL of the **front** app, used to build verify and reset links |
+| `DEFAULT_SUPERADMIN_PASSWORD` | empty | Optional bootstrap password for `DEFAULT_SUPERADMIN_EMAIL`. Required to create that administrator if the account does not exist; an existing account is promoted without changing its password |
 
 ## Database, beyond the required settings
 
