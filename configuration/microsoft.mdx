@@ -26,9 +26,9 @@ registration exists.
    a trailing slash is a different URI.
 4. *Certificates & secrets* → *New client secret*. Copy the **Value** column
    immediately; it is shown once, and the *Secret ID* is not the secret.
-5. *API permissions* → *Microsoft Graph* → *Delegated*, then grant consent:
-   `offline_access`, `User.Read`, `Mail.Read`, `Mail.Send`,
-   `Files.ReadWrite.All`, `Calendars.ReadWrite`, `Chat.Read`.
+5. *API permissions* → *Microsoft Graph* → *Delegated*. Add the identity scopes
+   and the scopes for each service you connect from the
+   [OAuth scopes table](/guides/integrations/microsoft#oauth-scopes), then grant consent.
 
 <Warning>
   Client secrets expire — six or twenty-four months, chosen at creation.

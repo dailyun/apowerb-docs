@@ -26,9 +26,7 @@ To establish the connection, you first need to set up an OAuth application in th
 
 <Steps>
   <Step title="Configure OAuth Consent Screen">
-    Go to **APIs & Services** > **OAuth consent screen**. Select **External** (or Internal), fill in required fields, and add the scopes needed:
-    - Gmail: `https://www.googleapis.com/auth/gmail.readonly`, `https://www.googleapis.com/auth/gmail.send`
-    - Drive: `https://www.googleapis.com/auth/drive.readonly`, `https://www.googleapis.com/auth/drive.file`
+    Go to **APIs & Services** > **OAuth consent screen**. Select **External** (or Internal), fill in required fields, and add the [scopes for the services you connect](#oauth-scopes).
   </Step>
   <Step title="Create Credentials">
     Go to **APIs & Services** > **Credentials** > **Create Credentials** > **OAuth client ID**.
@@ -40,6 +38,27 @@ To establish the connection, you first need to set up an OAuth application in th
     Download the JSON credentials or copy the **Client ID** and **Client Secret**.
   </Step>
 </Steps>
+
+## OAuth scopes
+
+Every service requests the identity scopes below, plus its service-specific scopes.
+The service bundles are defined in [`GOOGLE_SERVICES`](https://github.com/apowerb/apowerb/blob/main/src/apowerb/integrations/google.py).
+
+| Identity scope | Used for |
+| --- | --- |
+| `openid` | Authenticate the connected Google account. |
+| `email` | Identify the account by its email address. |
+| `profile` | Read the account's basic profile information. |
+
+| Service | Scope | Used for |
+| --- | --- | --- |
+| Drive | `https://www.googleapis.com/auth/drive.readonly` | Read and download files in Google Drive. |
+| Gmail | `https://www.googleapis.com/auth/gmail.readonly` | Read email messages and metadata. |
+| Gmail | `https://www.googleapis.com/auth/gmail.send` | Send email messages. |
+| Calendar | `https://www.googleapis.com/auth/calendar.readonly` | Read calendars and their events. |
+| Calendar | `https://www.googleapis.com/auth/calendar.events` | View and edit calendar events. |
+| Sheets | `https://www.googleapis.com/auth/spreadsheets` | Read and edit spreadsheets. |
+| Docs | `https://www.googleapis.com/auth/documents` | Read and edit documents. |
 
 ## Infrastructure Setup
 

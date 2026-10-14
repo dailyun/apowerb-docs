@@ -24,12 +24,38 @@ To establish the connection, you first need to register an application in the [M
     Navigate to **Certificates & secrets** > **Client secrets** > **New client secret**. Save the value securely.
   </Step>
   <Step title="API Permissions">
-    Go to **API permissions** > **Add a permission** > **Microsoft Graph**.
-    - For Outlook: Select `Mail.Read`, `Mail.Send`, `Calendars.Read`
-    - For OneDrive: Select `Files.Read.All`, `Files.ReadWrite`
-    - Click **Grant admin consent** if required.
+    Go to **API permissions** > **Add a permission** > **Microsoft Graph** > **Delegated permissions**.
+    Add the identity scopes and the [scopes for the services you connect](#oauth-scopes).
+    Click **Grant admin consent** if required.
   </Step>
 </Steps>
+
+## OAuth scopes
+
+Every service requests the identity scopes below, plus its service-specific scopes.
+These match `_IDENTITY` and `MICROSOFT_SERVICE_SCOPES` in
+[`integrations/microsoft.py`](https://github.com/apowerb/apowerb/blob/main/src/apowerb/integrations/microsoft.py).
+
+| Identity scope | Used for |
+| --- | --- |
+| `offline_access` | Refresh access tokens without asking the user to sign in again. |
+| `openid` | Authenticate the connected Microsoft account. |
+| `profile` | Read the account's basic profile information. |
+| `email` | Read the account's email address. |
+| `User.Read` | Read the signed-in user's profile through Microsoft Graph. |
+
+| Service | Scope | Used for |
+| --- | --- | --- |
+| Outlook | `Mail.Read` | Read messages in the user's mailbox. |
+| Outlook | `Mail.Send` | Send messages as the user. |
+| Outlook | `Mail.Read.Shared` | Read messages in mailboxes the user can access, including shared mailboxes. |
+| Outlook | `Mail.Send.Shared` | Send messages on behalf of other users where the user has permission. |
+| Teams | `Chat.Read` | Read the user's chats and messages. |
+| Teams | `Chat.ReadWrite` | Read and write the user's chats. |
+| Teams | `ChatMessage.Send` | Send chat messages on behalf of the user. |
+| SharePoint | `Sites.Read.All` | Read documents and list items across site collections. |
+| OneDrive | `Files.Read` | Read the signed-in user's files. |
+| OneDrive | `Files.ReadWrite` | Read, create, update, and delete the signed-in user's files. |
 
 ## Setup
 
